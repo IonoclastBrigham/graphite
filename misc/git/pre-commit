@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pushd `git rev-parse --show-toplevel`
+
+for file in `git diff --name-only --cached | grep '.go$'`
+do
+    gofmt -w $file
+    git add $file
+done
+
+popd

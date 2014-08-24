@@ -19,13 +19,17 @@ func main() {
 	if tErr != nil {
 		log.Fatal(tErr)
 	}
-	defer func() { if tLog != nil { tLog.Close() } }()
-	
+	defer func() {
+		if tLog != nil {
+			tLog.Close()
+		}
+	}()
+
 	tStat, tErr := tLog.Stat()
 	if tErr != nil {
 		log.Fatal(tErr)
 	}
-	
+
 	if tLogSize := tStat.Size(); tLogSize < LogLimit {
 		fmt.Println("log size: ", tLogSize)
 	} else {
